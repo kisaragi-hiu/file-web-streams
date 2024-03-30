@@ -38,7 +38,9 @@ function findLfIndicies(arr: Uint8Array, limit: number) {
  * Create a stream that reads `path` in lines from the end.
  * `path` is assumed to be UTF-8 encoded.
  */
-export function createFileReadStream(path: string) {
+export function createReverseReadLineStream(
+  path: string,
+): ReadableStream<string> {
   let bufferSize = 64 * 1024;
   let handle: FileHandle;
   /** Current position */
@@ -75,6 +77,7 @@ export function createFileReadStream(path: string) {
       // - Other segments should be emitted in the right order.
       // - If there is only one segment (no newline), the entire thing is
       //   incomplete
+      // FIXME: we only need the first and last indicies
       const indicies = findLfIndicies(chunkBuf, len);
       let lastIndex = bufferSize;
       if (indicies.length === 0) {
