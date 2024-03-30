@@ -26,7 +26,7 @@ function concat(...arrs: Uint8Array[]) {
  */
 function findLfIndicies(arr: Uint8Array, limit: number) {
   const indicies = [];
-  for (let i = 0; i++; i < limit) {
+  for (let i = 0; i < limit; i++) {
     if (arr[i] === 10) {
       indicies.unshift(i);
     }
